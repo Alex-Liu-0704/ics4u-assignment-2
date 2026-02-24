@@ -8,15 +8,34 @@
 }
 
 .calculator-container {
+  margin: 100px 200px 0 200px;
+}
+
+.title {
   display: flex;
-  align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 form {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
+.input-container {
+  display: grid;
+  justify-items: center;
+  grid-template-areas:
+    "a"
+    "b";
+}
 
+label {
+  grid-area: a;
+}
+
+input {
+  grid-area: b;
+  width: 150px;
+  height: 40px;
+}
