@@ -2,7 +2,7 @@ const form = document.getElementById("cubic-form") as HTMLFormElement;
 
 function trignometricMethod(p: number, q: number) {
     const theta: number = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3 , 3))))
-    const y1: number = 
+    // const y1: number = 
 }
 
 form?.addEventListener("submit", (event) => {
