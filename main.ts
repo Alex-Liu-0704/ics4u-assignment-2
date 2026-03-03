@@ -36,14 +36,10 @@ form?.addEventListener("submit", (event) => {
 
     if (discriminant < 0) {
         trignometricMethod(a, b, p, q)
-        //     (document.getElementById("result") as HTMLInputElement).value = "No Roots";
     } else if (discriminant > 0) {
         roots = [cardanosMethod(a, b, q, discriminant)]
-        //     const rootOne = (-b + Math.sqrt(discriminant)) / (2 * a);
-        //     const rootTwo = (-b - Math.sqrt(discriminant)) / (2 * a);
-        //     (document.getElementById("result") as HTMLInputElement).value = `x1=${rootOne}, x2=${rootTwo}`;
     } else {
-        if (p == 0 && q == 0) {
+        if (p === 0 && q === 0) {
             roots = [cardanosMethod(a, b, q, discriminant)]
         } else {
             roots = [
@@ -55,8 +51,4 @@ form?.addEventListener("submit", (event) => {
         }
     }
     console.log(roots)
-
-    //     const rootOne = (-b + Math.sqrt(discriminant)) / (2 * a);
-    //     (document.getElementById("result") as HTMLInputElement).value = `x=${rootOne}`;
-    // }
 })
