@@ -17,23 +17,23 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-function displayResults (p: number, q: number, discriminant: number) {
-    (document.getElementById("p") as HTMLInputElement).textContent = `${p}`;
-    (document.getElementById("q") as HTMLInputElement).textContent = `${q}`;
-    (document.getElementById("discriminant") as HTMLInputElement).textContent = `${discriminant}`;
+function displayResults (p: number, q: number, discriminant: number): void {
+    (document.getElementById("p") as HTMLInputElement).textContent = `${p.toFixed(5)}`;
+    (document.getElementById("q") as HTMLInputElement).textContent = `${q.toFixed(5)}`;
+    (document.getElementById("discriminant") as HTMLInputElement).textContent = `${discriminant.toFixed(5)}`;
     if (roots.length === 3) {
-        (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
-        (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[1]}`;
-        (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[2]}`;
-    } else {
+        (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
+        (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[1].toFixed(2)}`;
+        (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[2].toFixed(2)}`;
+    } else { // i dont need an else here right? but whys it the wrong answer when i take away the else
         if (discriminant > 0) {
-            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
+            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
             (document.getElementById("root-two") as HTMLInputElement).textContent = "complex";
             (document.getElementById("root-three") as HTMLInputElement).textContent = "complex";
         } else {
-            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
-            (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[0]}`;
-            (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[0]}`;
+            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
+            (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
+            (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
         };
     };
 };
@@ -68,7 +68,6 @@ form?.addEventListener("submit", (event) => {
             ];
         };
     };
-    console.log(a, b, c, d);
-    console.log(roots);
+    roots.sort((a, b) => a - b)
     displayResults(p, q, discriminant);
 });
