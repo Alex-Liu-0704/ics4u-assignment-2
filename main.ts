@@ -18,22 +18,22 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
 };
 
 function displayResults (p: number, q: number, discriminant: number) {
-    (document.getElementById("p") as HTMLInputElement).value = `${p}`;
-    (document.getElementById("p") as HTMLInputElement).value = `${q}`;
-    (document.getElementById("discriminant") as HTMLInputElement).value = `${discriminant}`;
+    (document.getElementById("p") as HTMLInputElement).textContent = `${p}`;
+    (document.getElementById("q") as HTMLInputElement).textContent = `${q}`;
+    (document.getElementById("discriminant") as HTMLInputElement).textContent = `${discriminant}`;
     if (roots.length === 3) {
-        (document.getElementById("root-one") as HTMLInputElement).value = `${roots[0]}`;
-        (document.getElementById("root-two") as HTMLInputElement).value = `${roots[1]}`;
-        (document.getElementById("root-three") as HTMLInputElement).value = `${roots[2]}`;
+        (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
+        (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[1]}`;
+        (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[2]}`;
     } else {
         if (discriminant > 0) {
-            (document.getElementById("root-one") as HTMLInputElement).value = `${roots[0]}`;
-            (document.getElementById("root-two") as HTMLInputElement).value = "complex";
-            (document.getElementById("root-three") as HTMLInputElement).value = "complex";
+            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
+            (document.getElementById("root-two") as HTMLInputElement).textContent = "complex";
+            (document.getElementById("root-three") as HTMLInputElement).textContent = "complex";
         } else {
-            (document.getElementById("root-one") as HTMLInputElement).value = `${roots[0]}`;
-            (document.getElementById("root-two") as HTMLInputElement).value = `${roots[0]}`;
-            (document.getElementById("root-three") as HTMLInputElement).value = `${roots[0]}`;
+            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0]}`;
+            (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[0]}`;
+            (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[0]}`;
         };
     };
 };
