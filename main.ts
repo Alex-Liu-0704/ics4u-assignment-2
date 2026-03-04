@@ -9,13 +9,13 @@ function trignometricMethod(a: number, b: number, p: number, q: number) {
     const y3: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3)
     roots = [y1, y2, y3]
     roots = roots.map((root) => root - b / (3 * a))
-}
+};
 
-function cardanosMethod(a: number, b: number, q: number, disciminant: number) {
+const cardanosMethod = (a: number, b: number, q: number, disciminant: number) => {
     return (
-        Math.cbrt(-q / 2 + Math.cbrt(disciminant)) + Math.cbrt(-q / 2 - Math.cbrt(disciminant)) - b / (3 * a)
+        Math.cbrt(-q / 2 + Math.sqrt(disciminant)) + Math.cbrt(-q / 2 - Math.sqrt(disciminant)) - b / (3 * a)
     );
-}
+};
 
 form?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -51,4 +51,4 @@ form?.addEventListener("submit", (event) => {
         }
     }
     console.log(roots)
-})
+});
