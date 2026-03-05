@@ -19,26 +19,16 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-function displayResults(p: number, q: number, discriminant: number): void { // use ternary instead fo define 3 roots and i only need one get element for each value
-    (document.getElementById("p") as HTMLInputElement).textContent = `${p.toFixed(5)}`;
-    (document.getElementById("q") as HTMLInputElement).textContent = `${q.toFixed(5)}`;
-    (document.getElementById("discriminant") as HTMLInputElement).textContent = `${discriminant.toFixed(5)}`;
-    if (roots.length === 3) {
-        (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
-        (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[1].toFixed(2)}`;
-        (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[2].toFixed(2)}`;
-    } else { // i dont need an else here right? but whys it the wrong answer when i take away the else
-        if (discriminant > 0) {
-            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
-            (document.getElementById("root-two") as HTMLInputElement).textContent = "complex";
-            (document.getElementById("root-three") as HTMLInputElement).textContent = "complex";
-        } else {
-            (document.getElementById("root-one") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
-            (document.getElementById("root-two") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
-            (document.getElementById("root-three") as HTMLInputElement).textContent = `${roots[0].toFixed(2)}`;
-        };
-    };
-};
+// function displayResults(p: number, q: number, discriminant: number): void { 
+//     (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
+//     (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
+//     (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
+//     (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
+//     (document.getElementById("root-two") as HTMLTableCellElement).textContent = 
+//         roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+//     (document.getElementById("root-three") as HTMLTableCellElement).textContent = 
+//         roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+// };
 
 // function displayGraph(): void {
 //     const canvas = document.getElementById("graph");
@@ -65,12 +55,12 @@ form?.addEventListener("submit", (event) => {
 
     const discriminant: number = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
 
-    // setting the equation
-    if (a===1) {
-        (document.getElementById("equation") as HTMLInputElement).textContent = `x³ + ${b}x² + ${c}x + ${d}`
-    } else {
-        (document.getElementById("equation") as HTMLInputElement).textContent = `${a}x³ + ${b}x² + ${c}x + ${d}`
-    };
+    // setting the equation -- do i put it all as one line? thats kinda a long line
+    (document.getElementById("equation") as HTMLInputElement).textContent =
+        `${a === 1 ? "" : a}x³` + 
+        `${b === 0 ? "" : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` + 
+        `${c === 0 ? "" : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` + 
+        `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}`;
 
     if (discriminant < 0) {
         trignometricMethod(a, b, p, q);
@@ -87,8 +77,17 @@ form?.addEventListener("submit", (event) => {
             ];
         };
     };
-    
-    roots.sort((a, b) => a - b)
-    displayResults(p, q, discriminant);
+
+    roots.sort((a, b) => a - b);
+
+    // display results using DOM
+    (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
+    (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
+    (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
+    (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
+    (document.getElementById("root-two") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+    (document.getElementById("root-three") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+
+    // displayResults(p, q, discriminant);
     outputContainer.hidden = false;
 });
