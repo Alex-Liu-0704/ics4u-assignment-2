@@ -1,5 +1,7 @@
 const form = document.getElementById("cubic-form") as HTMLFormElement;
 
+const outputContainer: HTMLElement = document.getElementById("output-container") as HTMLElement;
+
 let roots: number[] = [];
 
 function trignometricMethod(a: number, b: number, p: number, q: number): void {
@@ -17,7 +19,7 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-function displayResults (p: number, q: number, discriminant: number): void {
+function displayResults(p: number, q: number, discriminant: number): void { // use ternary instead fo define 3 roots and i only need one get element for each value
     (document.getElementById("p") as HTMLInputElement).textContent = `${p.toFixed(5)}`;
     (document.getElementById("q") as HTMLInputElement).textContent = `${q.toFixed(5)}`;
     (document.getElementById("discriminant") as HTMLInputElement).textContent = `${discriminant.toFixed(5)}`;
@@ -38,6 +40,11 @@ function displayResults (p: number, q: number, discriminant: number): void {
     };
 };
 
+// function displayGraph(): void {
+//     const canvas = document.getElementById("graph");
+//     const ctx = canvas.getContext("2d");
+// }
+
 form?.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -48,10 +55,22 @@ form?.addEventListener("submit", (event) => {
     const c: number = Number(formData.get("c"));
     const d: number = Number(formData.get("d"));
 
+    if (a === 0) {
+        alert("'a' value cannot be zero!");
+        return;
+    };
+
     const p: number = (3 * a * c - b * b) / (3 * a * a);
     const q: number = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
 
-    const discriminant = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+    const discriminant: number = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+
+    // setting the equation
+    if (a===1) {
+        (document.getElementById("equation") as HTMLInputElement).textContent = `x³ + ${b}x² + ${c}x + ${d}`
+    } else {
+        (document.getElementById("equation") as HTMLInputElement).textContent = `${a}x³ + ${b}x² + ${c}x + ${d}`
+    };
 
     if (discriminant < 0) {
         trignometricMethod(a, b, p, q);
@@ -68,6 +87,8 @@ form?.addEventListener("submit", (event) => {
             ];
         };
     };
+    
     roots.sort((a, b) => a - b)
     displayResults(p, q, discriminant);
+    outputContainer.hidden = false;
 });
