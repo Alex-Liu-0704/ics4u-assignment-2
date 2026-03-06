@@ -19,17 +19,6 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-// function displayResults(p: number, q: number, discriminant: number): void { 
-//     (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
-//     (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
-//     (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
-//     (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
-//     (document.getElementById("root-two") as HTMLTableCellElement).textContent = 
-//         roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-//     (document.getElementById("root-three") as HTMLTableCellElement).textContent = 
-//         roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-// };
-
 // function displayGraph(): void {
 //     const canvas = document.getElementById("graph");
 //     const ctx = canvas.getContext("2d");
