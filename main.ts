@@ -82,7 +82,7 @@ form?.addEventListener("submit", (event) => {
         `${b === 0 ? "" : b === 1 ? ` + x²` : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
         `${c === 0 ? "" : c === 1 ? ` + x` : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
         `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` +
-        ` = 0`;
+        ` = 0`; // apparenmty nested ternarys are bad formatting
 
     if (discriminant < 0) {
         trignometricMethod(a, b, p, q);
@@ -109,7 +109,7 @@ form?.addEventListener("submit", (event) => {
     (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
     (document.getElementById("root-two") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
     (document.getElementById("root-three") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-
+    // apparently nested ternarys are bad formatting
     drawGraph()
 
     // displayResults(p, q, discriminant);
