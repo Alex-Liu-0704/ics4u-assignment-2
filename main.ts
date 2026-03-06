@@ -19,10 +19,42 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-// function displayGraph(): void {
-//     const canvas = document.getElementById("graph");
-//     const ctx = canvas.getContext("2d");
-// }
+function drawGraph(): void {
+    const canvas = document.getElementById("graph") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) {
+        return;
+    }
+
+    const xCenter = canvas.width / 2;
+    const yCenter = canvas.height / 2;
+
+    ctx.beginPath();
+    ctx.strokeStyle = "#a5a5a5";
+
+    for (let x = 0; x <= canvas.width; x += 25) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+    };
+
+    for (let y = 0; y <= canvas.height; y += 25) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+    };
+
+    ctx.stroke();
+
+    // draw the axis
+    ctx.beginPath();
+    ctx.strokeStyle = "#505050";
+    ctx.lineWidth = 2;
+    ctx.moveTo(xCenter, 0);
+    ctx.lineTo(xCenter, canvas.height);
+    ctx.moveTo(0, yCenter);
+    ctx.lineTo(canvas.width, yCenter);
+    ctx.stroke();
+}
 
 form?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -45,11 +77,11 @@ form?.addEventListener("submit", (event) => {
     const discriminant: number = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
 
     // setting the equation -- do i put it all as one line? thats kinda a long line
-    (document.getElementById("equation") as HTMLInputElement).textContent = 
+    (document.getElementById("equation") as HTMLInputElement).textContent =
         `${a === 1 ? "" : a}x³` +
-        `${b === 0 ? "" : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
-        `${c === 0 ? "" : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
-        `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` + 
+        `${b === 0 ? "" : b === 1 ? ` + x²` : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
+        `${c === 0 ? "" : c === 1 ? ` + x` : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
+        `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` +
         ` = 0`;
 
     if (discriminant < 0) {
@@ -77,6 +109,8 @@ form?.addEventListener("submit", (event) => {
     (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
     (document.getElementById("root-two") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
     (document.getElementById("root-three") as HTMLTableCellElement).textContent = roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+
+    drawGraph()
 
     // displayResults(p, q, discriminant);
     outputContainer.hidden = false;
