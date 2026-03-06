@@ -37,20 +37,20 @@
     </form>
   </div>
   <div id="output-container" class="output-container" hidden>
+    <h2 id="equation"></h2>
     <div class="results-container">
-      <h2 id="equation"></h2>
       <table id="results-table">
         <tr>
           <td>p</td>
-          <td id="p">0</td>
+          <td colspan="2" id="p">0</td>
         </tr>
         <tr>
           <td>q</td>
-          <td id="q">0</td>
+          <td colspan="2" id="q">0</td>
         </tr>
         <tr>
           <td>Discriminant</td>
-          <td id="discriminant">0</td>
+          <td colspan="2" id="discriminant">0</td>
         </tr>
         <tr class="header-row">
           <th>Value</th>
@@ -73,9 +73,9 @@
           <td>0</td>
         </tr>
       </table>
-    </div>
-    <div class="graph-container">
-      <canvas id="graph" width="600" height="400"></canvas>
+      <div class="graph-container">
+        <canvas id="graph" width="600" height="400"></canvas>
+      </div>
     </div>
   </div>
 </body>

@@ -56,11 +56,12 @@ form?.addEventListener("submit", (event) => {
     const discriminant: number = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
 
     // setting the equation -- do i put it all as one line? thats kinda a long line
-    (document.getElementById("equation") as HTMLInputElement).textContent =
-        `${a === 1 ? "" : a}x³` + 
-        `${b === 0 ? "" : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` + 
-        `${c === 0 ? "" : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` + 
-        `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}`;
+    (document.getElementById("equation") as HTMLInputElement).textContent = 
+        `${a === 1 ? "" : a}x³` +
+        `${b === 0 ? "" : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
+        `${c === 0 ? "" : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
+        `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` + 
+        ` = 0`;
 
     if (discriminant < 0) {
         trignometricMethod(a, b, p, q);
