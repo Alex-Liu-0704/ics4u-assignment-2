@@ -2,15 +2,12 @@ const form = document.getElementById("cubic-form") as HTMLFormElement;
 
 const outputContainer: HTMLElement = document.getElementById("output-container") as HTMLElement;
 
-let roots: number[] = [];
-
-function trignometricMethod(a: number, b: number, p: number, q: number): void {
+function trignometricMethod(p: number, q: number): number[] {
     const theta: number = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
     const y1: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta);
     const y2: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3);
     const y3: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3);
-    roots = [y1, y2, y3];
-    roots = roots.map((root) => root - b / (3 * a));
+    return [y1, y2, y3];
 };
 
 const cardanosMethod = (a: number, b: number, q: number, disciminant: number): number => {
@@ -19,26 +16,31 @@ const cardanosMethod = (a: number, b: number, q: number, disciminant: number): n
     );
 };
 
-function drawGraph(): void {
+function drawGraph(roots: number[], a: number, b: number, c: number, d: number): void {
     const canvas = document.getElementById("graph") as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d");
+    const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
 
     if (!ctx) {
         return;
     }
 
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     const xCenter = canvas.width / 2;
     const yCenter = canvas.height / 2;
+    const scale = 25;
 
+    // draw grid
     ctx.beginPath();
     ctx.strokeStyle = "#a5a5a5";
+    ctx.lineWidth = 1;
 
-    for (let x = 0; x <= canvas.width; x += 25) {
+    for (let x = 0; x <= canvas.width; x += scale) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
     };
 
-    for (let y = 0; y <= canvas.height; y += 25) {
+    for (let y = 0; y <= canvas.height; y += scale) {
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
     };
@@ -54,7 +56,39 @@ function drawGraph(): void {
     ctx.moveTo(0, yCenter);
     ctx.lineTo(canvas.width, yCenter);
     ctx.stroke();
-}
+
+    // draw curve
+    ctx.beginPath();
+    ctx.strokeStyle = "Red";
+    ctx.lineWidth = 2;
+
+    const xStart = -canvas.width / 2 / scale;
+    const xEnd = canvas.width / 2 / scale;
+    const yStart = a * xStart * xStart * xStart + b * xStart * xStart + c * xStart + d;
+    ctx.moveTo(xCenter + xStart * scale, yCenter - yStart * scale);
+
+    for (let x = xStart; x <= xEnd; x += 0.1) {
+        const y = a * x * x * x + b * x * x + c * x + d;
+        const canvasX = xCenter + x * scale;
+        const canvasY = yCenter - y * scale;
+        ctx.lineTo(canvasX, canvasY);
+    };
+
+    ctx.stroke();
+
+    // plot roots
+    ctx.fillStyle = "grey";
+
+    for (let i = 0; i < roots.length; i++) {
+        const root = roots[i];
+        const x = xCenter + root * scale;
+        const y = yCenter;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, 2 * Math.PI);
+        ctx.fill();
+    };
+};
 
 form?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -74,7 +108,9 @@ form?.addEventListener("submit", (event) => {
     const p: number = (3 * a * c - b * b) / (3 * a * a);
     const q: number = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
 
-    const discriminant: number = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+    const discriminant: number = (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
+
+    let roots: number[] = [];
 
     // setting the equation -- do i put it all as one line? thats kinda a long line
     (document.getElementById("equation") as HTMLInputElement).textContent =
@@ -85,7 +121,8 @@ form?.addEventListener("submit", (event) => {
         ` = 0`; // apparenmty nested ternarys are bad formatting
 
     if (discriminant < 0) {
-        trignometricMethod(a, b, p, q);
+        roots = trignometricMethod(p, q);
+        roots = roots.map((root) => root - b / (3 * a));
     } else if (discriminant > 0) {
         roots = [cardanosMethod(a, b, q, discriminant)];
     } else {
@@ -107,12 +144,12 @@ form?.addEventListener("submit", (event) => {
     (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
     (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
     (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
-    (document.getElementById("root-two") as HTMLTableCellElement).textContent = 
+    (document.getElementById("root-two") as HTMLTableCellElement).textContent =
         roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-    (document.getElementById("root-three") as HTMLTableCellElement).textContent = 
+    (document.getElementById("root-three") as HTMLTableCellElement).textContent =
         roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
     // apparently nested ternarys are bad formatting
-    drawGraph()
+    drawGraph(roots, a, b, c, d)
 
     // displayResults(p, q, discriminant);
     outputContainer.hidden = false;
