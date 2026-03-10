@@ -1,12 +1,12 @@
 const form = document.getElementById("cubic-form") as HTMLFormElement;
 const outputContainer: HTMLElement = document.getElementById("output-container") as HTMLElement;
 
-function trignometricMethod(p: number, q: number): number[] {
+function trignometricMethod(a: number, b: number, p: number, q: number): number[] {
     const theta: number = (1 / 3) * Math.acos(-q / (2 * Math.sqrt(-Math.pow(p / 3, 3))));
     const y1: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta);
     const y2: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (2 * Math.PI) / 3);
     const y3: number = 2 * Math.sqrt(-p / 3) * Math.cos(theta + (4 * Math.PI) / 3);
-    return [y1, y2, y3];
+    return [y1, y2, y3].map((root) => root - b / (3 * a));
 };
 
 const cardanosMethod = (a: number, b: number, q: number, disciminant: number): number => {
@@ -120,8 +120,7 @@ form?.addEventListener("submit", (event) => {
         ` = 0`; 
 
     if (discriminant < 0) {
-        roots = trignometricMethod(p, q);
-        roots = roots.map((root) => root - b / (3 * a));
+        roots = trignometricMethod(a, b, p, q);
     } else if (discriminant > 0) {
         roots = [cardanosMethod(a, b, q, discriminant)];
     } else {
