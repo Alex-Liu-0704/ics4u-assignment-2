@@ -25,21 +25,21 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    const xCenter = canvas.width / 2;
-    const yCenter = canvas.height / 2;
-    const scale = 25;
+    const xCenter: number = canvas.width / 2;
+    const yCenter: number = canvas.height / 2;
+    const scale: number = 25;
 
     // draw grid
     ctx.beginPath();
     ctx.strokeStyle = "#E7E7E7";
     ctx.lineWidth = 1;
 
-    for (let x = 0; x <= canvas.width; x += scale) {
+    for (let x: number = 0; x <= canvas.width; x += scale) { // dont know if i need a type for for loop but i put it anyways
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
     };
 
-    for (let y = 0; y <= canvas.height; y += scale) {
+    for (let y: number = 0; y <= canvas.height; y += scale) {
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
     };
@@ -61,16 +61,16 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
     ctx.strokeStyle = "Red";
     ctx.lineWidth = 2;
 
-    const xStart = -canvas.width / 2 / scale;
-    const xEnd = canvas.width / 2 / scale;
-    const yStart = a * xStart * xStart * xStart + b * xStart * xStart + c * xStart + d;
+    const xStart: number = -canvas.width / 2 / scale;
+    const xEnd: number = canvas.width / 2 / scale;
+    const yStart: number = a * xStart * xStart * xStart + b * xStart * xStart + c * xStart + d;
 
     ctx.moveTo(xCenter + xStart * scale, yCenter - yStart * scale);
 
     for (let x = xStart; x <= xEnd; x += 0.1) {
-        const y = a * x * x * x + b * x * x + c * x + d;
-        const canvasX = xCenter + x * scale;
-        const canvasY = yCenter - y * scale;
+        const y: number = a * x * x * x + b * x * x + c * x + d;
+        const canvasX: number = xCenter + x * scale;
+        const canvasY: number = yCenter - y * scale;
         ctx.lineTo(canvasX, canvasY);
     };
 
@@ -79,10 +79,10 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
     // plot roots
     ctx.fillStyle = "#8C93A8";
 
-    for (let i = 0; i < roots.length; i++) {
-        const root = roots[i];
-        const x = xCenter + root * scale;
-        const y = yCenter;
+    for (let i: number = 0; i < roots.length; i++) {
+        const root: number = roots[i];
+        const x: number = xCenter + root * scale;
+        const y: number = yCenter;
 
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, 2 * Math.PI);
