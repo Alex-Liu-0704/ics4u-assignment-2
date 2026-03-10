@@ -67,7 +67,7 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
 
     ctx.moveTo(xCenter + xStart * scale, yCenter - yStart * scale);
 
-    for (let x = xStart; x <= xEnd; x += 0.1) {
+    for (let x: number = xStart; x <= xEnd; x += 0.1) {
         const y: number = a * x * x * x + b * x * x + c * x + d;
         const canvasX: number = xCenter + x * scale;
         const canvasY: number = yCenter - y * scale;
