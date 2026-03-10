@@ -1,5 +1,4 @@
 const form = document.getElementById("cubic-form") as HTMLFormElement;
-
 const outputContainer: HTMLElement = document.getElementById("output-container") as HTMLElement;
 
 function trignometricMethod(p: number, q: number): number[] {
@@ -22,7 +21,7 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
 
     if (!ctx) {
         return;
-    }
+    };
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -32,7 +31,7 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
 
     // draw grid
     ctx.beginPath();
-    ctx.strokeStyle = "#a5a5a5";
+    ctx.strokeStyle = "#E7E7E7";
     ctx.lineWidth = 1;
 
     for (let x = 0; x <= canvas.width; x += scale) {
@@ -65,6 +64,7 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
     const xStart = -canvas.width / 2 / scale;
     const xEnd = canvas.width / 2 / scale;
     const yStart = a * xStart * xStart * xStart + b * xStart * xStart + c * xStart + d;
+
     ctx.moveTo(xCenter + xStart * scale, yCenter - yStart * scale);
 
     for (let x = xStart; x <= xEnd; x += 0.1) {
@@ -77,7 +77,7 @@ function drawGraph(roots: number[], a: number, b: number, c: number, d: number):
     ctx.stroke();
 
     // plot roots
-    ctx.fillStyle = "grey";
+    ctx.fillStyle = "#8C93A8";
 
     for (let i = 0; i < roots.length; i++) {
         const root = roots[i];
@@ -107,18 +107,17 @@ form?.addEventListener("submit", (event) => {
 
     const p: number = (3 * a * c - b * b) / (3 * a * a);
     const q: number = (27 * a * a * d - 9 * a * b * c + 2 * b * b * b) / (27 * a * a * a);
-
     const discriminant: number = (q / 2) * (q / 2) + (p / 3) * (p / 3) * (p / 3);
 
     let roots: number[] = [];
 
-    // setting the equation -- do i put it all as one line? thats kinda a long line
+    // setting the equation 
     (document.getElementById("equation") as HTMLInputElement).textContent =
         `${a === 1 ? "" : a}x³` +
         `${b === 0 ? "" : b === 1 ? ` + x²` : b === -1 ? ` - x²` : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
         `${c === 0 ? "" : c === 1 ? ` + x` : c === -1 ? ` - x` : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
         `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` +
-        ` = 0`; // apparenmty nested ternarys are bad formatting
+        ` = 0`; 
 
     if (discriminant < 0) {
         roots = trignometricMethod(p, q);
@@ -148,9 +147,7 @@ form?.addEventListener("submit", (event) => {
         roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
     (document.getElementById("root-three") as HTMLTableCellElement).textContent =
         roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-    // apparently nested ternarys are bad formatting
-    drawGraph(roots, a, b, c, d)
-
-    // displayResults(p, q, discriminant);
+    
+    drawGraph(roots, a, b, c, d);
     outputContainer.hidden = false;
 });
