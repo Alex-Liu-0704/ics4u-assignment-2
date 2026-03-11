@@ -155,13 +155,13 @@ form?.addEventListener("submit", (event) => {
     (document.getElementById("root-one") as HTMLTableCellElement).textContent =
         Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2);
     (document.getElementById("root-two") as HTMLTableCellElement).textContent =
-        roots.length === 3 ? (Math.abs(roots[1]) < 0.005 ? "0.00" 
-        : roots[1].toFixed(2)) : discriminant > 0 ? "complex" 
-        : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
+        roots.length === 3 ? (Math.abs(roots[1]) < 0.005 ? "0.00"
+            : roots[1].toFixed(2)) : discriminant > 0 ? "complex"
+            : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
     (document.getElementById("root-three") as HTMLTableCellElement).textContent =
-        roots.length === 3 ? (Math.abs(roots[2]) < 0.005 ? "0.00" 
-        : roots[2].toFixed(2)) : discriminant > 0 ? "complex"
-        : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
+        roots.length === 3 ? (Math.abs(roots[2]) < 0.005 ? "0.00"
+            : roots[2].toFixed(2)) : discriminant > 0 ? "complex"
+            : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
 
     drawGraph(roots, a, b, c, d);
     outputContainer.hidden = false;
