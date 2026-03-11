@@ -6,19 +6,29 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.calculator-container {
-  margin: 100px 200px 0 200px;
-}
+/* .calculator-container {
+  margin: 0px 200px 0 200px;
+} */
 
 .title {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 40px;
+  padding-top: 10px;
+  background: #2a2a2a;
+  color: rgb(211, 211, 211);
+  width: 100vw;
+}
+
+.title:hover {
+  color: white;
 }
 
 form {
   display: flex;
   justify-content: space-between;
+  margin: 0px 200px 0 200px;
 }
 
 .input-container {
@@ -44,13 +54,18 @@ input {
 
 input[type="number"] {
   /* font-size: 16px; */
-  padding: 5px 8px;     
+  padding: 5px 8px;
 }
 
 #solve-button {
   width: 150px;
-  height: 70px;  
+  height: 70px;
   font-size: 16px;
+  font-weight: 600;
+  background: #2f72dc;
+  color: white;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
 }
 
 #solve-button:hover {
@@ -73,13 +88,13 @@ input[type="number"] {
 .results-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; 
+  align-items: flex-start;
   gap: 40px;
   margin-bottom: 50px;
 }
 
 #results-table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 #results-table td,
@@ -91,4 +106,10 @@ input[type="number"] {
 
 #results-table th {
   background-color: #f5f5f5;
+}
+
+.graph-container {
+  border: 1px solid #e2e2e2;
+  padding: 10px;
+  background: white;
 }
