@@ -117,7 +117,7 @@ form?.addEventListener("submit", (event) => {
         `${b === 0 ? "" : b === 1 ? ` + x²` : b === -1 ? ` - x²` : b > 0 ? ` + ${b}x²` : ` - ${Math.abs(b)}x²`}` +
         `${c === 0 ? "" : c === 1 ? ` + x` : c === -1 ? ` - x` : c > 0 ? ` + ${c}x` : ` - ${Math.abs(c)}x`}` +
         `${d === 0 ? "" : d > 0 ? ` + ${d}` : ` - ${Math.abs(d)}`}` +
-        ` = 0`; 
+        ` = 0`;
 
     if (discriminant < 0) {
         roots = trignometricMethod(a, b, p, q);
@@ -138,15 +138,31 @@ form?.addEventListener("submit", (event) => {
     roots.sort((a, b) => a - b);
 
     // display results using DOM
-    (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
-    (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
-    (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
-    (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
+    // (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
+    // (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
+    // (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
+    // (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
+    // (document.getElementById("root-two") as HTMLTableCellElement).textContent =
+    //     roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+    // (document.getElementById("root-three") as HTMLTableCellElement).textContent =
+    //     roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+    (document.getElementById("p") as HTMLTableCellElement).textContent =
+        Math.abs(p) < 0.000005 ? "0.00000" : p.toFixed(5);
+    (document.getElementById("q") as HTMLTableCellElement).textContent =
+        Math.abs(q) < 0.000005 ? "0.00000" : q.toFixed(5);
+    (document.getElementById("discriminant") as HTMLTableCellElement).textContent =
+        Math.abs(discriminant) < 0.000005 ? "0.00000" : discriminant.toFixed(5);
+    (document.getElementById("root-one") as HTMLTableCellElement).textContent =
+        Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2);
     (document.getElementById("root-two") as HTMLTableCellElement).textContent =
-        roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
+        roots.length === 3 ? (Math.abs(roots[1]) < 0.005 ? "0.00" 
+        : roots[1].toFixed(2)) : discriminant > 0 ? "complex" 
+        : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
     (document.getElementById("root-three") as HTMLTableCellElement).textContent =
-        roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-    
+        roots.length === 3 ? (Math.abs(roots[2]) < 0.005 ? "0.00" 
+        : roots[2].toFixed(2)) : discriminant > 0 ? "complex"
+        : (Math.abs(roots[0]) < 0.005 ? "0.00" : roots[0].toFixed(2));
+
     drawGraph(roots, a, b, c, d);
     outputContainer.hidden = false;
 });
