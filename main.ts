@@ -137,15 +137,6 @@ form?.addEventListener("submit", (event) => {
 
     roots.sort((a, b) => a - b);
 
-    // display results using DOM
-    // (document.getElementById("p") as HTMLTableCellElement).textContent = `${p.toFixed(5)}`;
-    // (document.getElementById("q") as HTMLTableCellElement).textContent = `${q.toFixed(5)}`;
-    // (document.getElementById("discriminant") as HTMLTableCellElement).textContent = `${discriminant.toFixed(5)}`;
-    // (document.getElementById("root-one") as HTMLTableCellElement).textContent = `${roots[0].toFixed(2)}`;
-    // (document.getElementById("root-two") as HTMLTableCellElement).textContent =
-    //     roots.length === 3 ? `${roots[1].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
-    // (document.getElementById("root-three") as HTMLTableCellElement).textContent =
-    //     roots.length === 3 ? `${roots[2].toFixed(2)}` : discriminant > 0 ? "complex" : `${roots[0].toFixed(2)}`;
     (document.getElementById("p") as HTMLTableCellElement).textContent =
         Math.abs(p) < 0.000005 ? "0.00000" : p.toFixed(5);
     (document.getElementById("q") as HTMLTableCellElement).textContent =
